@@ -17,6 +17,24 @@ if  user_input ==  '1' :
 elif user_input == '2' :
 	dir_name=raw_input("plz enter directory name with or without path :  ")
 	print  commands.getoutput("mkdir  "+dir_name)
+elif user_input == '4'	 :
+	commands.getoutput('yum  install httpd -y')
+	content=raw_input("enter content for your page : ")
+	commands.getoutput('echo '+content+' >/var/www/html/index.html')
+	commands.getoutput('systemctl start httpd ')
+	commands.getoutput('iptables -F')
+
+elif  user_input  == '5' :
+	commands.getoutput('yum  install nfs-utils -y')
+	commands.getoutput('systemctl enable --now nfs-server')
+	dir_name=raw_input("enter directory name with path:  ")
+	cliip=raw_input("enter client IP  ")
+	s_mode=raw_input("enter shareable mode like ro , rw   ")
+	nfs_entry=dir_name+"   "+cliip+"("+s_mode+")"
+	commands.getoutput('echo '+nfs_entry+' >>/etc/exports')
+	commands.getoutput('exportfs -r')
+
+
 	
 else :
 	print  "Invalid OPtion"
